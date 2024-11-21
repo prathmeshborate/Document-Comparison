@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.blinking-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.2em;
+    background-color: black;
+    animation: blink 0.7s steps(2, start) infinite;
+    margin-left: 2px;
+  }
+  
+  @keyframes blink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }  
