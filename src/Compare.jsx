@@ -103,7 +103,7 @@ function Compare() {
                 onClick={handleCompare}
                 disabled={loading}
             >
-                {loading ? 'Comparing...' : result || 'Compare'}
+                {loading ? 'Comparing...' : 'Compare'}
             </button>
 
             {result && (
