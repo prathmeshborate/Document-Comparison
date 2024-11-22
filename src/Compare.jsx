@@ -90,7 +90,7 @@ function Compare() {
                 ) : (
                     <div className="w-full h-24 flex items-center justify-center bg-blue-50 rounded-lg">
                         <img
-                            src="assets/file.svg"
+                            src="/assets/file.svg"
                             alt="Document Icon"
                             className="h-12 w-12 text-blue-400"
                         />
