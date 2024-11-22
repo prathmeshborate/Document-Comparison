@@ -10,10 +10,9 @@ require('dotenv').config();
 
 const app = express();
 
-const allowedOrigins = ['https://document-comparison-frontend-lilac.vercel.app'];
-app.use(cors({ 
-    origin: allowedOrigins, 
-    credentials: true 
+app.use(cors({
+    origin: 'https://document-comparison-frontend-lilac.vercel.app',
+    credentials: true
 }));
 
 app.use(bodyParser.json());
@@ -39,7 +38,21 @@ async function loadStandardDocument() {
 }
 loadStandardDocument();
 
-// Default route for testing
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader('Access-Control-Allow-Origin', 'https://document-comparison-frontend-lilac.vercel.app');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    );
+    if (req.method === 'OPTIONS') {
+        res.status(200).end();
+        return;
+    }
+    next();
+});
+
 app.get('/', (req, res) => {
     res.send('Backend is running! Use the correct endpoint to compare PDFs.');
 });
@@ -76,4 +89,4 @@ app.post('/compare-pdfs', upload.single('userDocument'), async (req, res) => {
     }
 });
 
-module.exports = app; // Export the app for Vercel
+module.exports = app;
